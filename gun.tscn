@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://drulkin6v2kac"]
+
+[ext_resource type="ArrayMesh" uid="uid://0aq41mnuyr3w" path="res://assets/gun.obj" id="1_tl8ky"]
+[ext_resource type="Material" uid="uid://cmtdiotfjapyb" path="res://metal.tres" id="2_jfs0a"]
+[ext_resource type="PackedScene" uid="uid://dvxqhpd3ako6f" path="res://bullet.tscn" id="2_jr3qi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8vs6"]
+albedo_color = Color(0.297037, 0.212261, 0.170734, 1)
+metallic = 0.2
+metallic_specular = 0.32
+rim = 0.26
+
+[node name="gun" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.101, 0, 0, 0, 0.101, 0, 0, 0, 0.101, 0, 0, 0)
+mesh = ExtResource("1_tl8ky")
+surface_material_override/0 = SubResource("StandardMaterial3D_t8vs6")
+surface_material_override/1 = ExtResource("2_jfs0a")
+surface_material_override/2 = ExtResource("2_jfs0a")
+
+[node name="bullet" parent="." instance=ExtResource("2_jr3qi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.147366, 0.479096, -0.335077)
+visible = false
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.154662, 0.492972, -0.758451)
+target_position = Vector3(0, 0, -1)
