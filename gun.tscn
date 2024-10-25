@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://drulkin6v2kac"]
+[gd_scene load_steps=7 format=3 uid="uid://drulkin6v2kac"]
 
 [ext_resource type="ArrayMesh" uid="uid://0aq41mnuyr3w" path="res://assets/gun.obj" id="1_tl8ky"]
 [ext_resource type="Material" uid="uid://cmtdiotfjapyb" path="res://metal.tres" id="2_jfs0a"]
@@ -6,9 +6,31 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8vs6"]
 albedo_color = Color(0.297037, 0.212261, 0.170734, 1)
-metallic = 0.2
-metallic_specular = 0.32
-rim = 0.26
+metallic_specular = 0.27
+roughness = 0.8
+rim = 0.7
+
+[sub_resource type="Animation" id="Animation_hbmp3"]
+resource_name = "shoot"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.09),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.5), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ihaf4"]
+_data = {
+"shoot": SubResource("Animation_hbmp3")
+}
 
 [node name="gun" type="Node3D"]
 
@@ -24,5 +46,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.147366, 0.479096, -0.33507
 visible = false
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.154662, 0.492972, -0.758451)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108142, 0.510864, -0.758451)
 target_position = Vector3(0, 0, -1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ihaf4")
+}

@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-const SPEED := 5.0
+var SPEED := 5.0
 const JUMP_VELOCITY := 4.5
 var mouse_sensitivity := 0.05
 var twist_input := 0.0
@@ -13,6 +13,7 @@ var instance
 
 @onready var gun_barrel = $camera_mount/gun/RayCast3D
 @onready var bullet = $camera_mount/gun/bullet
+@onready var gun_anim = $camera_mount/gun/AnimationPlayer
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -34,13 +35,19 @@ func _process(_delta: float) -> void:
 		else:
 			$camera_mount/tpcam.make_current()
 	if Input.is_action_just_pressed("shoot"):
-		instance = bullet_scene.instantiate()
-		instance.visible = true
-		instance.position = gun_barrel.global_position
-		instance.transform.basis = gun_barrel.global_transform.basis
-		get_parent().add_child(instance)
+		if !gun_anim.is_playing():
+			gun_anim.play("shoot")
+			instance = bullet_scene.instantiate()
+			instance.visible = true
+			instance.position = gun_barrel.global_position
+			instance.transform.basis = gun_barrel.global_transform.basis
+			get_parent().add_child(instance)
 	if Input.is_action_just_pressed("focus"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if Input.is_action_pressed("sprint"):
+		SPEED = 8.0
+	else:
+		SPEED = 5.0
 
 
 func _physics_process(delta: float) -> void:
