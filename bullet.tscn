@@ -20,7 +20,7 @@ direction = Vector3(1, 0, 1)
 initial_velocity_min = 3.37
 initial_velocity_max = 5.97
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l0gog"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_irfeh"]
 transparency = 1
 albedo_color = Color(0.878431, 1, 0.0509804, 0.729412)
 emission_enabled = true
@@ -29,7 +29,7 @@ emission_energy_multiplier = 13.18
 emission_operator = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_rgfui"]
-material = SubResource("StandardMaterial3D_l0gog")
+material = SubResource("StandardMaterial3D_irfeh")
 size = Vector3(0.04, 0.04, 0.04)
 
 [node name="bullet" type="Node3D"]
@@ -45,11 +45,11 @@ skeleton = NodePath("../..")
 shape = SubResource("ConvexPolygonShape3D_fw82e")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0134214)
-target_position = Vector3(0, 0, -0.35)
+transform = Transform3D(0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, 0, 0, 0.0514682)
+target_position = Vector3(0, 0, -0.5)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.59875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.046946)
 emitting = false
 one_shot = true
 explosiveness = 1.0

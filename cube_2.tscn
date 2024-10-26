@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://yd4tm8c15la7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qlyf6"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ip0uq"]
+data = PackedVector3Array(-1, 0.5, 1, 1, 0.5, 1, -1, -0.5, 1, 1, 0.5, 1, 1, -0.5, 1, -1, -0.5, 1, 1, 0.5, -1, -1, 0.5, -1, 1, -0.5, -1, -1, 0.5, -1, -1, -0.5, -1, 1, -0.5, -1, 1, 0.5, 1, 1, 0.5, -1, 1, -0.5, 1, 1, 0.5, -1, 1, -0.5, -1, 1, -0.5, 1, -1, 0.5, -1, -1, 0.5, 1, -1, -0.5, -1, -1, 0.5, 1, -1, -0.5, 1, -1, -0.5, -1, 1, 0.5, 1, -1, 0.5, 1, 1, 0.5, -1, -1, 0.5, 1, -1, 0.5, -1, 1, 0.5, -1, -1, -0.5, 1, 1, -0.5, 1, -1, -0.5, -1, 1, -0.5, 1, 1, -0.5, -1, -1, -0.5, -1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jjj7q"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+velocity_pivot = Vector3(1, 0, 1)
+direction = Vector3(0, 0, 2)
+initial_velocity_min = 5.03
+initial_velocity_max = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nl06c"]
+albedo_color = Color(0.733005, 0.733005, 0.733005, 0.862745)
+emission = Color(0.74902, 0, 0.282353, 1)
+emission_energy_multiplier = 2.38
+
+[sub_resource type="BoxMesh" id="BoxMesh_hl6wp"]
+material = SubResource("StandardMaterial3D_nl06c")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="cube2" type="StaticBody3D" groups=["Target"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_qlyf6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_ip0uq")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15595, 0)
+emitting = false
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jjj7q")
+draw_pass_1 = SubResource("BoxMesh_hl6wp")

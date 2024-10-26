@@ -1,11 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://bmwa10ey65w0c"]
+[gd_scene load_steps=18 format=3 uid="uid://bmwa10ey65w0c"]
 
 [ext_resource type="Script" path="res://node_3d.gd" id="1_st22n"]
 [ext_resource type="PackedScene" uid="uid://ffekn0jianaf" path="res://player2.tscn" id="2_efdxg"]
 [ext_resource type="Script" path="res://label.gd" id="2_lre0w"]
-[ext_resource type="Script" path="res://cube.gd" id="3_4deoy"]
+[ext_resource type="PackedScene" uid="uid://brooolffit6ap" path="res://cube.tscn" id="3_5541t"]
 [ext_resource type="Script" path="res://player_2.gd" id="3_xrggq"]
+[ext_resource type="PackedScene" uid="uid://yd4tm8c15la7" path="res://cube_2.tscn" id="4_lsq4e"]
 [ext_resource type="Texture2D" uid="uid://5khhrrpmoscf" path="res://assets/crosshair.png" id="4_lvb8x"]
+[ext_resource type="Script" path="res://cube.gd" id="5_vdvqx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qp1i"]
 albedo_color = Color(0.527, 0.5487, 0.62, 1)
@@ -46,38 +48,6 @@ fog_light_energy = 0.57
 fog_density = 0.0641
 adjustment_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iqc3f"]
-albedo_color = Color(0.840115, 0.051185, 0.314827, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_5jha0"]
-material = SubResource("StandardMaterial3D_iqc3f")
-size = Vector3(2, 2, 2)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0ktep"]
-data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1)
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jjj7q"]
-velocity_pivot = Vector3(1, 0, 1)
-direction = Vector3(0, 0, 2)
-spread = 61.071
-initial_velocity_min = 1.6
-initial_velocity_max = 80.55
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nl06c"]
-albedo_color = Color(1, 0.207843, 0.439216, 0.862745)
-emission = Color(0.74902, 0, 0.282353, 1)
-emission_energy_multiplier = 2.38
-
-[sub_resource type="BoxMesh" id="BoxMesh_hl6wp"]
-material = SubResource("StandardMaterial3D_nl06c")
-size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_qlyf6"]
-size = Vector3(2, 1, 2)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ip0uq"]
-data = PackedVector3Array(-1, 0.5, 1, 1, 0.5, 1, -1, -0.5, 1, 1, 0.5, 1, 1, -0.5, 1, -1, -0.5, 1, 1, 0.5, -1, -1, 0.5, -1, 1, -0.5, -1, -1, 0.5, -1, -1, -0.5, -1, 1, -0.5, -1, 1, 0.5, 1, 1, 0.5, -1, 1, -0.5, 1, 1, 0.5, -1, 1, -0.5, -1, 1, -0.5, 1, -1, 0.5, -1, -1, 0.5, 1, -1, -0.5, -1, -1, 0.5, 1, -1, -0.5, 1, -1, -0.5, -1, 1, 0.5, 1, -1, 0.5, 1, 1, 0.5, -1, -1, 0.5, 1, -1, 0.5, -1, 1, 0.5, -1, -1, -0.5, 1, 1, -0.5, 1, -1, -0.5, -1, 1, -0.5, 1, 1, -0.5, -1, -1, -0.5, -1)
-
 [node name="main" type="Node3D"]
 script = ExtResource("1_st22n")
 
@@ -114,41 +84,11 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("2_lre0w")
 
-[node name="cube" type="StaticBody3D" parent="." groups=["Target"]]
-script = ExtResource("3_4deoy")
+[node name="cube" parent="." instance=ExtResource("3_5541t")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="cube"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 1, 5.638)
-mesh = SubResource("BoxMesh_5jha0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="cube"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 1, 5.638)
-shape = SubResource("ConcavePolygonShape3D_0ktep")
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="cube"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.34394, 0, 6.55694)
-emitting = false
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_jjj7q")
-draw_pass_1 = SubResource("BoxMesh_hl6wp")
-
-[node name="cube2" type="StaticBody3D" parent="." groups=["Target"]]
-script = ExtResource("3_4deoy")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="cube2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 5.69768)
-mesh = SubResource("BoxMesh_qlyf6")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="cube2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 5.69768)
-shape = SubResource("ConcavePolygonShape3D_ip0uq")
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="cube2"]
-emitting = false
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_jjj7q")
-draw_pass_1 = SubResource("BoxMesh_hl6wp")
+[node name="cube2" parent="." instance=ExtResource("4_lsq4e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.525504, 6)
+script = ExtResource("5_vdvqx")
 
 [node name="player" parent="." instance=ExtResource("2_efdxg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09838, 0)

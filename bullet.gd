@@ -21,9 +21,13 @@ func _process(delta: float) -> void:
 		particles.emitting = true
 		if ray.get_collider().is_in_group("Target"):
 			#print("hit")
-			ray.get_collider().process_mode = 4
-			ray.get_collider().hide()
-			#$main/cube/GPUParticles3D.emitting = true
+			
+			if ray.get_collider().has_method("on_hit"):
+				ray.get_collider().on_hit()
+				
+			#ray.get_collider().process_mode = 4
+			#ray.get_collider().hide()
+			
 			
 			hit.emit()
 			pass

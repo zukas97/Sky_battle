@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://brooolffit6ap"]
+
+[ext_resource type="Script" path="res://cube.gd" id="1_1oopc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iqc3f"]
+albedo_color = Color(0.840115, 0.051185, 0.314827, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5jha0"]
+material = SubResource("StandardMaterial3D_iqc3f")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0ktep"]
+data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jjj7q"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+velocity_pivot = Vector3(1, 0, 1)
+direction = Vector3(0, 2, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nl06c"]
+albedo_color = Color(1, 0.207843, 0.439216, 0.862745)
+emission = Color(0.74902, 0, 0.282353, 1)
+emission_energy_multiplier = 2.38
+
+[sub_resource type="BoxMesh" id="BoxMesh_hl6wp"]
+material = SubResource("StandardMaterial3D_nl06c")
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="cube" type="StaticBody3D" groups=["Target"]]
+script = ExtResource("1_1oopc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 1, 5.638)
+mesh = SubResource("BoxMesh_5jha0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.375, 1, 5.638)
+shape = SubResource("ConcavePolygonShape3D_0ktep")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.89329, 0.99894, 5.69078)
+emitting = false
+lifetime = 2.0
+one_shot = true
+speed_scale = 1.25
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jjj7q")
+draw_pass_1 = SubResource("BoxMesh_hl6wp")
